@@ -1,23 +1,77 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import { marked } from "marked";
 
 function App() {
+  const initialState = 
+    `# Welcome to my React Markdown Previewer!
+
+  ## [React](https://reactjs.org/) (Hooks) x JavaScript
+  ### This is examples:
+  
+  I place all the **_JSX_** between \`<div></div>\`.
+  
+  \`\`\`
+  // this is multi-line code:
+  
+  function App() {
+    const initialState = "";
+    const [editorText, setEditorText] = useState(initialState);
+
+    return (
+      <div className="App">
+        <Editor />
+        <Previewer />
+      </div>
+    );
+  }
+
+export default App;
+
+  function anotherExample(firstLine, lastLine) {
+    if (firstLine == '\`\`\`' && lastLine == '\`\`\`') {
+      return multiLineCode;
+    }
+  }
+  \`\`\`
+  
+
+
+  > What resource do I use to learn coding skills?
+  - freeCodeCamp
+  - Udemy
+  - YouTube
+  - Mentoring
+
+  
+  ![My Logo](https://ys4510.github.io/Sunrise/img/favicon.ico)
+  `;
+  
+  const initialStateMarked = marked(initialState);
+  const [editorText, setEditorText] = useState(initialState);
+  const [formatted, setFormatted] = useState(initialStateMarked);
+
+  const handleTextChange = (e) => {
+    console.log(e.target.value);
+    setEditorText(e.target.value);
+    setFormatted(marked(editorText));
+  };
+  
+  function createMarkup() {
+    return { __html: formatted };
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h2>Markdown Previewer</h2>
+      <div className="container editor">
+        <div className="topbar">Editor</div>
+        <textarea id="editor" onChange={handleTextChange} value={editorText} />
+      </div>
+      <div className="container preview">
+      <div className="topbar">Preview</div>
+      <div id="preview" dangerouslySetInnerHTML={createMarkup()} />
+      </div>
     </div>
   );
 }
