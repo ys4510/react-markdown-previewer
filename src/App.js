@@ -52,12 +52,13 @@ export default App;
   const [formatted, setFormatted] = useState(initialStateMarked);
 
   const handleTextChange = (e) => {
-    console.log(e.target.value);
-    setEditorText(e.target.value);
-    setFormatted(marked(editorText));
+    const texts = e.target.value;
+    const html = marked(texts);
+    setEditorText(texts);
+    setFormatted(html);
   };
   
-  function createMarkup() {
+    function createMarkup() {
     return { __html: formatted };
   }
 
