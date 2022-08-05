@@ -6,7 +6,8 @@ function App() {
   const initialState = 
     `# Welcome to my React Markdown Previewer!
 
-  ## [React](https://reactjs.org/) (Hooks) x JavaScript
+  ## React (Hooks) x JavaScript
+  [React](https://reactjs.org/)
   ### This is examples:
   
   I place all the **_JSX_** between \`<div></div>\`.
