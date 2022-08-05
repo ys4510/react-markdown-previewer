@@ -3,6 +3,7 @@ import "./App.css";
 import { marked } from "marked";
 
 function App() {
+
   const initialState = 
     `# Welcome to my React Markdown Previewer!
 
@@ -57,6 +58,11 @@ export default App;
     const html = marked(texts);
     setEditorText(texts);
     setFormatted(html);
+    console.log(marked(`# hello
+    
+    ## world  
+    
+    `, {gfm: true, breaks: true}));
   };
   
     function createMarkup() {
